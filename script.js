@@ -69,11 +69,17 @@ class TreasureGrid {
     }
 
     setupKeyboardControls() {
+        // Set initial selection
+        const chests = Array.from(this.container.querySelectorAll('.chest'));
+        this.selectedIndex = 0;
+        chests[0].classList.add('selected');
+
         document.addEventListener('keydown', (e) => {
             if (this.isCheatRunning) return;
             
             const chests = Array.from(this.container.querySelectorAll('.chest'));
             let newIndex = this.selectedIndex;
+            const gridWidth = 10; // Grid is 10x10
 
             switch(e.key) {
                 case 'ArrowRight':
@@ -83,10 +89,10 @@ class TreasureGrid {
                     newIndex = Math.max(this.selectedIndex - 1, 0);
                     break;
                 case 'ArrowUp':
-                    newIndex = Math.max(this.selectedIndex - 10, 0);
+                    newIndex = Math.max(this.selectedIndex - gridWidth, 0);
                     break;
                 case 'ArrowDown':
-                    newIndex = Math.min(this.selectedIndex + 10, 99);
+                    newIndex = Math.min(this.selectedIndex + gridWidth, 99);
                     break;
                 case ' ': // Spacebar
                     e.preventDefault(); // Prevent page scroll
@@ -115,7 +121,6 @@ class TreasureGrid {
         for (let i = 0; i < 100; i++) {
             const chest = document.createElement('div');
             chest.className = 'chest';
-            if (i === 0) chest.classList.add('selected');
             chest.addEventListener('mousedown', () => this.startBreaking(chest));
             chest.addEventListener('mouseup', () => this.stopBreaking());
             chest.addEventListener('mouseleave', () => this.stopBreaking());
@@ -418,4 +423,10 @@ class TreasureGrid {
 // Initialize the game when the page loads
 window.addEventListener('load', () => {
     new TreasureGrid();
+});
+
+// Add legend toggle functionality
+document.getElementById('legend-toggle').addEventListener('click', () => {
+    const legend = document.getElementById('legend');
+    legend.classList.toggle('hidden');
 }); 

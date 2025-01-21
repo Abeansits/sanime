@@ -16,6 +16,14 @@ A satisfying web-based game where you break chests to discover gems of varying r
 - Visual indicator shows your current selection
 - Mouse hover still works for selection
 
+### Interface
+- Collection panel always visible on the left
+- Collapsible side panel (toggle button on the right) contains:
+  - Reset Grid button
+  - Open All button
+  - Auto Roll toggle
+  - Gem Rarities guide with probabilities
+
 ## ✨ Features
 
 ### Gems & Rarities
